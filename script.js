@@ -1,13 +1,43 @@
-let index = 0;
-let text = ["", "I", "'", "m", " ", " P", "r"]
+const startButton = document.querySelector('#startButton');
+const codeSection = document.querySelector('#appearingCode');
+const box = document.querySelector('#box');
 
-helloText = document.querySelector("#hello");
-startButton = document.querySelector("#startButton");
+const array = [
+    "Initializing C:/Unauthorized_User/Secret/PROJECTNAME.exe", 
+    "Access Denied.",
+    "Attempting to bypass firewall...",
+    "Firewall is impenetrable. Mission failed. ",
+    "Firewall is impenetrable. Mission failed. ",
+    "Firewall is impenetrable. Mission failed. ",
+    "Mission success. ",
+    "Executing program PROJECTNAME.exe",
+    "API executed successfully Starting PROJECTNAME.exe"
+
+];
+
+let intervalId;
+let iterations = 0;
 
 
-function loadAnimation() {
-    helloText.innerText +=  text[index];
-    index++;
+function writeCode() {
+    intervalId = setInterval(() => {
+        codeSection.innerText += "\n" + array[iterations] ;
+        iterations++;
+
+        if (iterations >= 9) {
+            clearInterval(intervalId);
+            box.innerText = "Add short description of PROJECT as well as a textbox for input tmr";
+        }
+    
+    }, randomDelayMaker());
+
+    startButton.removeEventListener('click', writeCode);
+    
 }
 
-startButton.addEventlistener("click", loadAnimation());
+function randomDelayMaker() {
+    let delay = 800;
+    return delay;
+}
+
+startButton.addEventListener('click', writeCode);
