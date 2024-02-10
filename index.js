@@ -1,16 +1,16 @@
 import { Express } from "express";
-import OpenAI from "openai";
+importOpenAI from "openai";
 
 
 const openai = new OpenAI({
     organization: "org-luARjjyTeb5FLVVoL8Ok8PRy",
-    apiKey: "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",
+    apiKey: "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",
 });
 
 const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
-        {role: "user", content: "Hello World"},
+        {role: "user", content: "What is 2 + 2?"},
     ]
 
 })
