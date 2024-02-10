@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -23,12 +25,12 @@
             </div>
 
             <div class = "right-nav">
-                <h2>Start</h2>
+                <button id="startButton" type="button" class="nes-btn is-primary" onclick="loadAnimation()">Start</button>
             </div>
          </div>
         
          <div class = "hero">
-            <p class = "title">Hello! <br> I'm Project Name</p>
+            <p id="hello" class = "title">Hello! <br> I'm Project Name</p>
             <h3 class = "description"> I am a generative AI that </h3>
          </div>
 
@@ -37,5 +39,6 @@
 
          </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
