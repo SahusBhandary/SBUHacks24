@@ -1,5 +1,4 @@
-import { Express } from "express";
-importOpenAI from "openai";
+import OpenAI from "openai";
 
 
 const openai = new OpenAI({
