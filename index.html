@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,25 +25,33 @@
             </div>
 
             <div class = "right-nav">
-                <button id="startButton" type="button" class="nes-btn is-primary" onclick="loadAnimation()">Start</button>
+                <button id="startButton" type="button" class="start-button" onclick="loadAnimation()"><img src="./pictures/start-button.png" class="start-pic"></button>
             </div>
          </div>
         
-         <div class = "hero">
+         <div id="hero" class = "hero">
             <br>
             <br>
             <br>
             <br>
-            <p id="hello" class = "title">Hello! I'm Project Name</p>
-            <!-- <h3 class = "description"> I am a generative AI that </h3> -->
+            <p id="hello" class = "title">Hello! I'm <span style="color: #209cee; text-decoration: underline;">Project Name</span></p>
+            <h3 class = "description"></h3>
             <div id="appearingCode"></div>
             <br>
-            <div id="box"></div>
+            <div id="desc">
+                Please type SBUHACKS to start.
+            </div>
+            <div id="chat">
+
+            </div>
+            <div id="box">
+                <input type="text" name="" id="textBox">
+                <button id="submitButton" class="send-button"><img src="./pictures/send-button.png" class="send-pic"></button>
+            </div>
          </div>
-
-
-         
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
+

@@ -13,6 +13,8 @@ p, h1, h2, h3{
 }
 .website-container{
     display:grid;
+    background-color: black;
+   
 }
 
 .top-bar{
@@ -26,27 +28,19 @@ p, h1, h2, h3{
     width: 12px;
     border-radius: 1000px;
 }
-.red-circle:hover{
-    background-color: #FF0000;
-}
-.yellow-circle:hover{
-    background-color: #FFFF00;
-}
-.circle3:hover{
-    background-color: #00FF00;
-    
-}
 
 .hero{
-    background-color: rgb(0, 0, 0, .95);
+    background-color: black;
     height: 100vh;   
-    
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .nav-bar{
     display: grid;
     grid-template-columns: 50% 50%;
-    background-color: rgb(0, 0, 0, .95);
+    background-color: black;
 }
 
 .smile{
@@ -70,7 +64,7 @@ p, h1, h2, h3{
     white-space: nowrap;
     overflow: hidden;
     font-weight: 800;
-    width: 900px;
+    width: 850px;
     
     margin: 0 auto;
     border-right: .15em solid white;
@@ -101,7 +95,71 @@ p, h1, h2, h3{
 }
 
 #box {
+    display: none;
     color: white;
     padding-left: 40px;
+    padding-top: 50px;
+    text-align: center;
+    background-color: black;
+    padding-bottom: 100px;
 }
 
+#textBox {
+    width: 800px;
+    height:30px;
+}
+
+#desc {
+    display: none;
+    padding-left: 40px;
+    color: white;
+    padding-bottom: 50px;
+}
+
+#chat {
+    color: white;
+    text-align: right;
+    margin-right: 200px;
+    margin-left: 200px;
+    background-color: grey;
+    padding-right: 50px;
+
+}
+
+#startButton {
+    background-color: #209cee;
+}
+
+#submitButton {
+    background-color: green;
+}
+
+.start-button{
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    background-image: url(./pictures/start-button.png);
+    background-size: cover;
+  }
+  
+  .start-button:hover, .send-button:hover{
+    opacity: .9;
+    fill-opacity: 50%;
+    transition-delay: 100ms;
+  }
+  .start-pic{
+    width: 100px;
+  }
+
+  .send-pic {
+    width: 70px;
+  }
+
+  .send-button{
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    background-image: url(./pictures/start-button.png);
+    background-size: cover;
+    vertical-align: bottom;
+  }
