@@ -1,34 +1,79 @@
-* {
+*{
     margin: 0;
     padding: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.nav-bar {
+body {
+    background-color: black;
+}
+
+p, h1, h2, h3{
+    color: whitesmoke;
+    font-family: 'Space Mono', monospace;
+}
+.website-container{
+    display:grid;
+}
+
+.top-bar{
+    background-color: lightskyblue;
+    border: 1px solid black;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.green-circle, .red-circle, .yellow-circle{
+    width: 12px;
+    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 0px;
+    border-radius: 1000px;
+}
+.red-circle:hover{
+    background-color: #FF0000;
+}
+.yellow-circle:hover{
+    background-color: #FFFF00;
+}
+.circle3:hover{
+    background-color: #00FF00;
+    
+}
+
+.hero{
+    background-color: rgb(0, 0, 0, .95);
+    height: 100vh;   
+    
+}
+
+.nav-bar{
     display: grid;
     grid-template-columns: 50% 50%;
-    background-color: #121519;
-    color: 	white;
-    padding: 10px;
+    background-color: rgb(0, 0, 0, .95);
 }
 
-.right-nav {
+.smile{
+    width: 35px;
+}
+
+.left-nav{
+    padding-left: 35px;
+    padding-top: 25px;
+}
+
+.right-nav{
     text-align: right;
     padding-right: 20px;
+    padding-top: 25px;
 }
 
-.left-nav  {
-    padding-left: 20px;
+.title{
+    padding-top: 150px;
+    padding-left: 40px;
+    font-size: 60px;
+    font-weight: 800;
 }
 
-.hero {
-    height: 900px;
-    background-color: #24292e;
-}
-
-.footer {
-    text-align: center;
-    background-color: #121519;
-    padding: 12px;
-    color: white;
+.description{
+    padding-left: 40px;
 }
