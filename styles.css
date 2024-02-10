@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    background-color: black;
+}
+
 p, h1, h2, h3{
     color: whitesmoke;
     font-family: 'Space Mono', monospace;
