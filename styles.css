@@ -64,7 +64,7 @@ p, h1, h2, h3{
     white-space: nowrap;
     overflow: hidden;
     font-weight: 800;
-    width: 850px;
+    width: 950px;
     
     margin: 0 auto;
     border-right: .15em solid white;
@@ -72,7 +72,7 @@ p, h1, h2, h3{
     display: inline-block;
     
     animation:
-        typing 3s steps(20),
+        typing 3s steps(26),
         cursor 0.8s linear infinite alternate;
 }
 
@@ -114,6 +114,7 @@ p, h1, h2, h3{
     padding-left: 40px;
     color: white;
     padding-bottom: 50px;
+    line-height: 30px;
 }
 
 #chat {
@@ -122,8 +123,7 @@ p, h1, h2, h3{
     margin-right: 200px;
     margin-left: 200px;
     background-color: grey;
-    padding-right: 50px;
-
+    border: 2px solid white;
 }
 
 #startButton {
@@ -162,4 +162,10 @@ p, h1, h2, h3{
     background-image: url(./pictures/start-button.png);
     background-size: cover;
     vertical-align: bottom;
+  }
+
+  .chat-header{
+    color: white;
+    width: 800px;
+    align-items: center;
   }

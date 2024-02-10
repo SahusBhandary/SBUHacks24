@@ -4,9 +4,12 @@ const input = document.querySelector('#textBox');
 const submitButton = document.querySelector('#submitButton');
 const chat = document.querySelector('#chat');
 const box = document.querySelector('#box');
-const hero = document.querySelector('#hero')
+const hero = document.querySelector('#hero');
+const inputArray = [
+
+]
 const array = [
-    "Initializing C:/SBUHacker_User/TopSecret/PROJECTNAME.exe", 
+    "Initializing C:/SBUHacker_User/TopSecret/SOCIALSYNCAI.exe", 
     "Access Denied.",
     "Attempting to bypass firewall...",
     "Firewall is impenetrable.",
@@ -14,8 +17,8 @@ const array = [
     "Attempting to bypass firewall again...",
     "Firewall is impenetrable.",
     "Mission success. ",
-    "Executing program PROJECTNAME.exe",
-    "API executed successfully Starting PROJECTNAME.exe"
+    "Executing program SOCIALSYNCAI.exe",
+    "API executed successfully Starting SOCIALSYNCAI.exe"
 ];
 let intervalId;
 let iterations = 0;
@@ -23,7 +26,7 @@ let iterations = 0;
 
 function writeCode() {
     intervalId = setInterval(() => {
-        codeSection.innerText += "\n" + array[iterations] ;
+        codeSection.innerText += "\n" + array[iterations] + "\n";
         iterations++;
 
         if (iterations >= 10) {
@@ -46,34 +49,185 @@ function randomDelayMaker() {
 
 let counter = 0;
 function writeChat() {
-    if (counter == 0 && input.value != "SBUHACKS") {
+    if (counter == 0 && input.value != "START") {
 
     }
-    else if (counter == 0 && input.value == "SBUHACKS") {
-        counter = 1;
+    else if (counter == 0 && input.value == "START") {
+        counter++;
         const welcome = document.createElement('p');
+        const botHeader1 = document.createElement('p');
+        botHeader1.innerText = "\nBot";
+        botHeader1.style.alignItems = "center";
+        botHeader1.style.backgroundColor = "grey";
+        botHeader1.style.color= "#333333";
+        botHeader1.style.textAlign = "left";
+        botHeader1.style.marginRight = "40px";
+        botHeader1.style.marginLeft = "40px";
+        botHeader1.style.fontWeight = "800";
+        botHeader1.style.textDecoration = "underline";
+        botHeader1.style.fontSize = "22px";
         welcome.style.textAlign = "left";
         welcome.style.paddingLeft = "40px";
-        welcome.innerText = "\nHi. I am Project Name Chat\n\n";
+        welcome.innerText = "Hi. I am SocialSync AI. Enter description of ai. Where do you plan to eat?\n\n";
+        chat.append(botHeader1);
         chat.appendChild(welcome);
+
     
     }
-    else {
-        counter = 1;
+    else if (counter == 1){
+        counter++;
         const newText = document.createElement('p');
-        newText.innerText = "\n";
+        const user = document.createElement('p');
+        user.innerText = "User";
+        user.style.alignItems = "center";
+        user.style.backgroundColor = "grey";
+        user.style.color= "#333333";
+        user.style.textAlign = "right";
+        user.style.marginRight = "40px";
+        user.style.marginLeft = "40px";
+        user.style.fontWeight = "800";
+        user.style.textDecoration = "underline";
+        user.style.fontSize = "22px";
+        newText.innerText += "\n";
         newText.innerText += input.value;
         newText.innerText += "\n\n";
+        inputArray.push(input.value);
+        newText.style.alignItems = "center";
+        newText.style.backgroundColor = "grey";
+        newText.style.textAlign = "right";
+        newText.style.marginRight = "40px";
+        newText.style.marginLeft = "40px";
+    
+        
+        chat.append(user);
         chat.appendChild(newText);
         const newBotText = document.createElement('p');
-        newBotText.innerText = "Response\n\n";
+        const botHeader = document.createElement('p');
+        botHeader.innerText = "Bot";
+        botHeader.style.alignItems = "center";
+        botHeader.style.backgroundColor = "grey";
+        botHeader.style.color= "#333333";
+        botHeader.style.textAlign = "left";
+        botHeader.style.marginRight = "40px";
+        botHeader.style.marginLeft = "40px";
+        botHeader.style.fontWeight = "800";
+        botHeader.style.textDecoration = "underline";
+        botHeader.style.fontSize = "22px";
+        newBotText.innerText = "What time?\n\n";
+        newBotText.style.backgroundColor = "grey";
+        newBotText.style.alignItems = "center";
         newBotText.style.textAlign = "left";
-        newBotText.style.paddingLeft = "40px";
-        chat.append(newBotText);
-
+        newBotText.style.marginLeft = "40px";
+        newBotText.style.marginRight = "40px";
         
+        chat.append(botHeader);
+        chat.append(newBotText);
     }
+    else if (counter == 2) {
+        counter++;
+        const newText = document.createElement('p');
+        const user = document.createElement('p');
+        user.innerText = "User";
+        user.style.alignItems = "center";
+        user.style.backgroundColor = "grey";
+        user.style.color= "#333333";
+        user.style.textAlign = "right";
+        user.style.marginRight = "40px";
+        user.style.marginLeft = "40px";
+        user.style.fontWeight = "800";
+        user.style.textDecoration = "underline";
+        user.style.fontSize = "22px";
+        newText.innerText += "\n";
+        newText.innerText += input.value;
+        newText.innerText += "\n\n";
+        inputArray.push(input.value);
+        newText.style.alignItems = "center";
+        newText.style.backgroundColor = "grey";
+        newText.style.textAlign = "right";
+        newText.style.marginRight = "40px";
+        newText.style.marginLeft = "40px";
+    
+        
+        chat.append(user);
+        chat.appendChild(newText);
+        const newBotText = document.createElement('p');
+        const botHeader = document.createElement('p');
+        botHeader.innerText = "Bot";
+        botHeader.style.alignItems = "center";
+        botHeader.style.backgroundColor = "grey";
+        botHeader.style.color= "#333333";
+        botHeader.style.textAlign = "left";
+        botHeader.style.marginRight = "40px";
+        botHeader.style.marginLeft = "40px";
+        botHeader.style.fontWeight = "800";
+        botHeader.style.textDecoration = "underline";
+        botHeader.style.fontSize = "22px";
+        newBotText.innerText = "How many people?\n\n";
+        newBotText.style.backgroundColor = "grey";
+        newBotText.style.alignItems = "center";
+        newBotText.style.textAlign = "left";
+        newBotText.style.marginLeft = "40px";
+        newBotText.style.marginRight = "40px";
+        
+        chat.append(botHeader);
+        chat.append(newBotText);
+    }
+    else if (counter == 3) {
+        counter++;
+        const newText = document.createElement('p');
+        const user = document.createElement('p');
+        user.innerText = "User";
+        user.style.alignItems = "center";
+        user.style.backgroundColor = "grey";
+        user.style.color= "#333333";
+        user.style.textAlign = "right";
+        user.style.marginRight = "40px";
+        user.style.marginLeft = "40px";
+        user.style.fontWeight = "800";
+        user.style.textDecoration = "underline";
+        user.style.fontSize = "22px";
+        newText.innerText += "\n";
+        newText.innerText += input.value;
+        newText.innerText += "\n\n";
+        inputArray.push(input.value);
+        newText.style.alignItems = "center";
+        newText.style.backgroundColor = "grey";
+        newText.style.textAlign = "right";
+        newText.style.marginRight = "40px";
+        newText.style.marginLeft = "40px";
+    
+        
+        chat.append(user);
+        chat.appendChild(newText);
+
+        const newBotText = document.createElement('p');
+        const botHeader = document.createElement('p');
+        botHeader.innerText = "Bot";
+        botHeader.style.alignItems = "center";
+        botHeader.style.backgroundColor = "grey";
+        botHeader.style.color= "#333333";
+        botHeader.style.textAlign = "left";
+        botHeader.style.marginRight = "40px";
+        botHeader.style.marginLeft = "40px";
+        botHeader.style.fontWeight = "800";
+        botHeader.style.textDecoration = "underline";
+        botHeader.style.fontSize = "22px";
+        newBotText.innerText = "Thanks for your input! Generating results. Please wait.\n\n";
+        newBotText.style.backgroundColor = "grey";
+        newBotText.style.alignItems = "center";
+        newBotText.style.textAlign = "left";
+        newBotText.style.marginLeft = "40px";
+        newBotText.style.marginRight = "40px";
+        
+        chat.append(botHeader);
+        chat.append(newBotText);
+    }
+    else {
+        return;
+    }
+    
 }
 
 startButton.addEventListener('click', writeCode);
 submitButton.addEventListener('click', writeChat);
+
