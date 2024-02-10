@@ -1,13 +1,13 @@
-import{ Configuration, OpenAIApi } from "openai";
+import { Express } from "express";
+importOpenAI from "openai";
 
-const configuration = new Configuration({
+
+const openai = new OpenAI({
     organization: "org-luARjjyTeb5FLVVoL8Ok8PRy",
     apiKey: "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",
 });
 
-const openai = new OpenAIApi(configuration);
-
-const completion = await openai.createChatCompletion({
+const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
         {role: "user", content: "Hello World"},
@@ -15,4 +15,4 @@ const completion = await openai.createChatCompletion({
 
 })
 
-console.log(completion.data.choices[0].message);
+console.log(completion.choices[0].message);
