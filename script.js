@@ -5,8 +5,10 @@ const submitButton = document.querySelector('#submitButton');
 const chat = document.querySelector('#chat');
 const box = document.querySelector('#box');
 const hero = document.querySelector('#hero');
+let responseMessage;
 let chatMessage = ``;
-let aiResponse = "";
+let aiResponse;
+
 const output = {
     "location": "",
     "time": "",
@@ -75,6 +77,7 @@ function writeChat() {
         welcome.style.paddingLeft = "40px";
         welcome.style.fontSize = "14px";
         welcome.style.paddingTop = "12.5px"
+        welcome.style.paddingRight = "40px";
         welcome.innerText = "Hello! I'm SocialSync AI, your advanced planning companion. Do you have a destination in mind?\n\n";
         chat.append(botHeader1);
         chat.appendChild(welcome);
@@ -105,7 +108,7 @@ function writeChat() {
         newText.style.marginRight = "40px";
         newText.style.marginLeft = "40px";
         newText.style.fontSize = "14px";
-        newText.style.paddingTop = "12.5px"
+        newText.style.paddingTop = "12.5px";
     
         
         chat.append(user);
@@ -129,7 +132,7 @@ function writeChat() {
         newBotText.style.marginLeft = "40px";
         newBotText.style.marginRight = "40px";
         newBotText.style.fontSize = "14px";
-        newBotText.style.paddingTop = "12.5px"
+        newBotText.style.paddingTop = "12.5px";
         
         chat.append(botHeader);
         chat.append(newBotText);
@@ -158,7 +161,7 @@ function writeChat() {
         newText.style.marginRight = "40px";
         newText.style.marginLeft = "40px";
         newText.style.fontSize = "14px";
-        newText.style.paddingTop = "12.5px"
+        newText.style.paddingTop = "12.5px";
     
         
         chat.append(user);
@@ -182,7 +185,7 @@ function writeChat() {
         newBotText.style.marginLeft = "40px";
         newBotText.style.marginRight = "40px";
         newBotText.style.fontSize = "14px";
-        newBotText.style.paddingTop = "12.5px"
+        newBotText.style.paddingTop = "12.5px";
 
         chat.append(botHeader);
         chat.append(newBotText);
@@ -214,7 +217,7 @@ function writeChat() {
         newText.style.marginRight = "40px";
         newText.style.marginLeft = "40px";
         newText.style.fontSize = "14px";
-        newText.style.paddingTop = "12.5px"
+        newText.style.paddingTop = "12.5px";
     
         
         chat.append(user);
@@ -239,17 +242,20 @@ function writeChat() {
         newBotText.style.marginLeft = "40px";
         newBotText.style.marginRight = "40px";
         newBotText.style.fontSize = "14px";
-        newBotText.style.paddingTop = "12.5px"
+        newBotText.style.paddingTop = "12.5px";
         
         chat.append(botHeader);
         chat.append(newBotText);
         chatMessage = `Can you create plans for ${output["people"]} people in ${output["location"]} at ${output["time"]}. First 
         create three bullet points for places to eat, then create three bullet points for activities nearby, then create three bullet points
-        for tourist attractions nearby. And at the end can you create a list that is divided by the rest of the content using an astirek that 
+        for tourist attractions nearby. At the end can you create a list called "*Places" that 
         lists all the places you mentioned each seperated by commas.`;
         chatResponse();
         console.log(chatMessage.toString());
-        parseString(chatMessage);
+        console.log(aiResponse);
+        setTimeout(() =>{
+            parseString(aiResponse);
+        }, 12500);
         return;
     }
     else {
@@ -258,7 +264,7 @@ function writeChat() {
     
 }
 
-function chatResponse(){
+async function chatResponse(){
     fetch('http://localhost:3000', { // fetches from JS local host
             method: 'POST', // post request
             headers: {
@@ -291,18 +297,110 @@ function chatResponse(){
         newBotText.style.textAlign = "left";
         newBotText.style.marginLeft = "40px";
         newBotText.style.marginRight = "40px";
+        newBotText.style.fontSize = "14px";
+        newBotText.style.paddingTop = "12.5px";
         
         chat.append(botHeader);
         chat.append(newBotText);
-        let responseMessage = data.completion.content.toString()
+        aiResponse = data.completion.content.toString();
+        responseMessage = data.completion.content.toString();
     })
-    return responseMessage
+    return responseMessage;
 }
 
-function parseString(chatResponse){
-    let message = chatResponse;
-    let pointer = message.charAt(0);
-    console.log(pointer);
+async function parseString(aiResponse){
+    let array = aiResponse.split('*');
+    let importantPlaces = array[1].split(',');
+    importantPlaces[0] = importantPlaces[0].substring(8);
+    fetchPlaceDetails(importantPlaces);
+    return importantPlaces;
+}
+
+let newCount = 1;
+function fetchPlaceDetails(importantPlaces) {
+    for (let i = 0; i < importantPlaces.length; i++){
+    fetch(`http://localhost:3000/placeDetails?placeName=${encodeURIComponent(importantPlaces[i])}`)
+        .then(response => response.json()) // Parse the JSON response
+        .then(data => {
+            // Display place details on the page
+            const placeDetailsDiv = document.getElementById('placeDetails');
+            if (data.price_level == null) {
+                data.price_level = "N/A";
+            }
+            if (data.formatted_phone_number == null) {
+                data.formatted_phone_number = "N/A";
+            }
+            if (data.rating == null) {
+                data.rating = "N/A";
+            }
+            const photoUrl = data.photos && data.photos.length > 0
+                ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos[0].photo_reference}&key=AIzaSyB_n34-IOXe5h1mNGiSKKf2kWf-DD1KrZ0`
+                : 'Photo not available';
+            // placeDetailsDiv.innerHTML = `
+            //     <p><strong>Name:</strong> ${data.name}</p>
+            //     <p><strong>Rating:</strong> ${data.rating}</p>
+            //     <p><strong>Price Level:</strong> ${data.price_level}</p>
+            //     <p><strong>Opening Hours:</strong> ${data.opening_hours ? JSON.stringify(data.opening_hours) : 'Not available'}</p>
+            //     <p><strong>Phone Number:</strong> ${data.formatted_phone_number}</p>
+            //     <p><strong>Address:</strong> ${data.formatted_address}</p>
+            //     <p><strong>Photo:</strong> <img src="${photoUrl}" alt="Place Photo"></p>
+            // `;
+            const num = document.createElement('p');
+            num.innerText = newCount + ")";
+            newCount++;
+            num.style.textAlign = "left";
+            num.style.marginLeft = "40px";
+            num.style.fontSize = "14px";
+            chat.appendChild(num);
+            const name = document.createElement('p');
+            name.innerHTML = `<p><strong>Name:</strong> ${data.name}</p>`;
+            name.style.fontWeight = "bold";
+            name.style.alignItems = "center";
+            name.style.textAlign = "left";
+            name.style.marginLeft = "40px";
+            name.style.fontSize = "14px";
+            chat.appendChild(name);
+            const rating = document.createElement('p');
+            rating.innerHTML = `<p><strong>Rating: </strong> ${data.rating}</p>`;
+            rating.style.fontWeight = "bold";
+            rating.style.textAlign = "left";
+            rating.style.paddingLeft = "40px";
+            rating.style.alignItems = "center";
+            rating.style.fontSize = "14px";
+            chat.appendChild(rating);
+            const priceLevel = document.createElement('p');
+            priceLevel.innerHTML = `<p><strong>Price Level</strong> ${data.price_level}</p>`;
+            priceLevel.style.fontWeight = "bold";
+            priceLevel.style.textAlign = "left";
+            priceLevel.style.paddingLeft = "40px";
+            priceLevel.style.alignItems = "center";
+            priceLevel.style.fontSize = "14px";
+            chat.appendChild(priceLevel);
+            const phoneNum = document.createElement('p');
+            phoneNum.innerHTML = `<p><strong>Phone Number:</strong> ${data.formatted_phone_number}</p>`;
+            phoneNum.style.fontWeight = "bold";
+            phoneNum.style.textAlign = "left";
+            phoneNum.style.paddingLeft = "40px";
+            phoneNum.style.alignItems = "center";
+            phoneNum.style.fontSize = "14px";
+            chat.appendChild(phoneNum);
+            const address = document.createElement('p');
+            address.innerHTML = `<p><strong>Address:</strong> ${data.formatted_address}</p>`;
+            address.style.fontWeight = "bold";
+            address.style.textAlign = "left";
+            address.style.paddingLeft = "40px";
+            address.style.alignItems = "center";
+            address.style.fontSize = "14px";
+            chat.appendChild(address);
+            const photo = document.createElement('img');
+            photo.src= `${photoUrl}`;
+            photo.style.marginRight = "590px";
+            photo.style.marginTop = "20px";
+            photo.style.marginBottom = "20px";
+            chat.appendChild(photo);
+        })
+        .catch(error => console.error('Error fetching place details:', error)); // Log any errors
+    }
 }
 
 startButton.addEventListener('click', writeCode);

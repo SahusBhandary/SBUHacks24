@@ -12,13 +12,13 @@
     <script>
         // Function to fetch place details from the backend
         function fetchPlaceDetails(placeName) {
-            fetch(`/placeDetails?placeName=${encodeURIComponent(placeName)}`)
+            fetch(`http://localhost:3000/placeDetails?placeName=${encodeURIComponent(placeName)}`)
                 .then(response => response.json()) // Parse the JSON response
                 .then(data => {
                     // Display place details on the page
                     const placeDetailsDiv = document.getElementById('placeDetails');
                     const photoUrl = data.photos && data.photos.length > 0
-                        ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos[0].photo_reference}&key=YOUR_API_KEY`
+                        ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos[0].photo_reference}&key=AIzaSyB_n34-IOXe5h1mNGiSKKf2kWf-DD1KrZ0`
                         : 'Photo not available';
                     placeDetailsDiv.innerHTML = `
                         <p><strong>Name:</strong> ${data.name}</p>
@@ -34,7 +34,7 @@
         }
 
         // Example usage: Fetch place details for a specific place name
-        fetchPlaceDetails('Shake Shack');
+        fetchPlaceDetails('Chipotle');
     </script>
 </body>
 </html>
