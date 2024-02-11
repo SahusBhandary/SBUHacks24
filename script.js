@@ -5,9 +5,13 @@ const submitButton = document.querySelector('#submitButton');
 const chat = document.querySelector('#chat');
 const box = document.querySelector('#box');
 const hero = document.querySelector('#hero');
-const inputArray = [
-
-]
+let chatMessage = ``;
+let aiResponse = "";
+const output = {
+    "location": "",
+    "time": "",
+    "people": ""
+}
 const array = [
     "Initializing C:/SBUHacker_User/TopSecret/SOCIALSYNCAI.exe", 
     "Access Denied.",
@@ -91,7 +95,7 @@ function writeChat() {
         newText.innerText += "\n";
         newText.innerText += input.value;
         newText.innerText += "\n\n";
-        inputArray.push(input.value);
+        output.location = input.value;
         newText.style.alignItems = "center";
         newText.style.backgroundColor = "grey";
         newText.style.textAlign = "right";
@@ -140,7 +144,7 @@ function writeChat() {
         newText.innerText += "\n";
         newText.innerText += input.value;
         newText.innerText += "\n\n";
-        inputArray.push(input.value);
+        output.time = input.value;
         newText.style.alignItems = "center";
         newText.style.backgroundColor = "grey";
         newText.style.textAlign = "right";
@@ -189,7 +193,10 @@ function writeChat() {
         newText.innerText += "\n";
         newText.innerText += input.value;
         newText.innerText += "\n\n";
-        inputArray.push(input.value);
+        output["people"] = input.value;
+        console.log(output["people"]);
+        console.log(output["location"]);
+        console.log(output["time"]);
         newText.style.alignItems = "center";
         newText.style.backgroundColor = "grey";
         newText.style.textAlign = "right";
@@ -221,13 +228,80 @@ function writeChat() {
         
         chat.append(botHeader);
         chat.append(newBotText);
+        chatMessage = `Can you create plans for ${output["people"]} people in ${output["location"]} at ${output["time"]}. First 
+        create three bullet points for places to eat, then create three bullet points for activities nearby, then create three bullet points
+        for tourist attractions nearby. And at the end can you create a list that lists all the places you mentioned each seperated by commas.`;
+        chatResponse();
+        console.log(chatMessage);
+        return;
     }
     else {
-        return;
+        
     }
     
 }
 
+function chatResponse(){
+    fetch('http://localhost:3000', { // fetches from JS local host
+            method: 'POST', // post request
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: chatMessage
+            })
+    })
+    .then(res => res.json()) //used to resolve a promise in api call
+    //res.json is from index.js the object file created when the response is given from the API
+    .then(data => {
+        //repsonse
+        console.log(data.completion.content.toString());
+        const newBotText = document.createElement('p');
+        const botHeader = document.createElement('p');
+        botHeader.innerText = "Bot";
+        botHeader.style.alignItems = "center";
+        botHeader.style.backgroundColor = "grey";
+        botHeader.style.color= "#333333";
+        botHeader.style.textAlign = "left";
+        botHeader.style.marginRight = "40px";
+        botHeader.style.marginLeft = "40px";
+        botHeader.style.fontWeight = "800";
+        botHeader.style.textDecoration = "underline";
+        botHeader.style.fontSize = "22px";
+        newBotText.innerText = data.completion.content.toString() + "\n\n";
+        newBotText.style.backgroundColor = "grey";
+        newBotText.style.alignItems = "center";
+        newBotText.style.textAlign = "left";
+        newBotText.style.marginLeft = "40px";
+        newBotText.style.marginRight = "40px";
+        
+        chat.append(botHeader);
+        chat.append(newBotText);
+    })
+}
+
 startButton.addEventListener('click', writeCode);
+input.addEventListener('keypress', function(e) {
+    if (e.key == 'Enter') {
+        writeChat();
+        input.value = "";
+    }
+});
 submitButton.addEventListener('click', writeChat);
+// submitButton.addEventListener('keypress', function(e){
+//     if (e.key == 'Enter'){
+//         chatResponse();
+        
+//     }
+// });
+
+
+//Chat response
+
+
+
+
+
+
+
 

@@ -19,23 +19,24 @@
         </div>
     </main>
 	<script>
-        const chatLog = document.getElementById('chat-log');
-        const message = document.getElementById('message');
-        const form = document.querySelector('form');
+        const chatLog = document.getElementById('chat-log'); /* gets the input from the form and stores it in chat-log so it can be displayed in 
+        response to the submit button (this is the users question) */
+        const message = document.getElementById('message'); /*Gets the message input from the form and stores it in message*/
+        const form = document.querySelector('form'); /*stores the form in a variable form using query selector*/
         form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const messageText = message.value;
+            e.preventDefault(); // prevents the form from submitting
+            const messageText = message.value; //stores the message value in the messageText and clears the input in the next line for later
             message.value = '';
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.classList.add('message--sent');
+            const messageElement = document.createElement('div'); // adds the message element into div
+            messageElement.classList.add('message'); // adds the message
+            messageElement.classList.add('message--sent'); //adds the returned message from chat
             messageElement.innerHTML = `
                 <div class="message__text">${messageText}</div>
-            `;
-            chatLog.appendChild(messageElement);
-            chatLog.scrollTop = chatLog.scrollHeight;
-            fetch('http://localhost:3000', {
-                method: 'POST',
+            `; 
+            chatLog.appendChild(messageElement); // appends message to chat log
+            chatLog.scrollTop = chatLog.scrollHeight; // doesnt refresh the page
+            fetch('http://localhost:3000', { // fetches from JS local host
+                method: 'POST', // post request
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -43,8 +44,10 @@
                     message: messageText
                 })
             })
-            .then(res => res.json())
+            .then(res => res.json()) //used to resolve a promise in api call
+            //res.json is from index.js the object file created when the response is given from the API
             .then(data => {
+                //repsonse
                 const messageElement = document.createElement('div');
                 messageElement.classList.add('message');
                 messageElement.classList.add('message--recieved');
