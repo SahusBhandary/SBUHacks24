@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Details</title>
+</head>
+<body>
+    <h1>Place Details</h1>
+    <div id="placeDetails"></div>
+
+    <script>
+        // Function to fetch place details from the backend
+        function fetchPlaceDetails(placeName) {
+            fetch(`/placeDetails?placeName=${encodeURIComponent(placeName)}`)
+                .then(response => response.json()) // Parse the JSON response
+                .then(data => {
+                    // Display place details on the page
+                    const placeDetailsDiv = document.getElementById('placeDetails');
+                    const photoUrl = data.photos && data.photos.length > 0
+                        ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${data.photos[0].photo_reference}&key=YOUR_API_KEY`
+                        : 'Photo not available';
+                    placeDetailsDiv.innerHTML = `
+                        <p><strong>Name:</strong> ${data.name}</p>
+                        <p><strong>Rating:</strong> ${data.rating}</p>
+                        <p><strong>Price Level:</strong> ${data.price_level}</p>
+                        <p><strong>Opening Hours:</strong> ${data.opening_hours ? JSON.stringify(data.opening_hours) : 'Not available'}</p>
+                        <p><strong>Phone Number:</strong> ${data.formatted_phone_number}</p>
+                        <p><strong>Address:</strong> ${data.formatted_address}</p>
+                        <p><strong>Photo:</strong> <img src="${photoUrl}" alt="Place Photo"></p>
+                    `;
+                })
+                .catch(error => console.error('Error fetching place details:', error)); // Log any errors
+        }
+
+        // Example usage: Fetch place details for a specific place name
+        fetchPlaceDetails('Shake Shack');
+    </script>
+</body>
+</html>
