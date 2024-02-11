@@ -230,9 +230,11 @@ function writeChat() {
         chat.append(newBotText);
         chatMessage = `Can you create plans for ${output["people"]} people in ${output["location"]} at ${output["time"]}. First 
         create three bullet points for places to eat, then create three bullet points for activities nearby, then create three bullet points
-        for tourist attractions nearby. And at the end can you create a list that lists all the places you mentioned each seperated by commas.`;
+        for tourist attractions nearby. And at the end can you create a list that is divided by the rest of the content using an astirek that 
+        lists all the places you mentioned each seperated by commas.`;
         chatResponse();
-        console.log(chatMessage);
+        console.log(chatMessage.toString());
+        parseString(chatMessage);
         return;
     }
     else {
@@ -277,7 +279,15 @@ function chatResponse(){
         
         chat.append(botHeader);
         chat.append(newBotText);
+        let responseMessage = data.completion.content.toString()
     })
+    return responseMessage
+}
+
+function parseString(chatResponse){
+    let message = chatResponse;
+    let pointer = message.charAt(0);
+    console.log(pointer);
 }
 
 startButton.addEventListener('click', writeCode);
