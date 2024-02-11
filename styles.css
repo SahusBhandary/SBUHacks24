@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    
 }
 
 body {
@@ -9,8 +10,9 @@ body {
 
 p, h1, h2, h3{
     color: whitesmoke;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Press Start 2P', system-ui;
 }
+
 .website-container{
     display:grid;
     background-color: black;
@@ -23,7 +25,10 @@ p, h1, h2, h3{
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+
 .green-circle, .red-circle, .yellow-circle{
     width: 12px;
     border-radius: 1000px;
@@ -60,7 +65,7 @@ p, h1, h2, h3{
 
 .title{
     padding-left: 40px;
-    font-size: 60px;
+    font-size: 37px;
     white-space: nowrap;
     overflow: hidden;
     font-weight: 800;
@@ -122,8 +127,8 @@ p, h1, h2, h3{
     text-align: right;
     margin-right: 200px;
     margin-left: 200px;
-    background-color: grey;
-    border: 2px solid white;
+    background-color: #333333;
+    font-family: 'Press Start 2P', system-ui;
 }
 
 #startButton {
@@ -172,7 +177,7 @@ p, h1, h2, h3{
 
   .text-box{
     width: 500px;
-    height: 30px;
+    height: 60px;
     border: 3px solid black;
     box-shadow: 3px 3px 0px black;
     font-family: "Press Start 2P", system-ui;
@@ -181,6 +186,7 @@ p, h1, h2, h3{
     padding-left: 15px;
     caret-shape:block;
     cursor: grab;
+    vertical-align: top;
 }
 
 .text-box:focus{
